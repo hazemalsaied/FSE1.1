@@ -1,0 +1,55 @@
+<ion-side-menus enable-menu-with-back-views="true">
+
+    <ion-side-menu-content>
+        <!--navigation bar-->
+        <ion-nav-bar class="bar-positive ">
+
+            <ion-nav-buttons side="right">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+
+        <!--the main content-->
+        <ion-nav-view name="menuContent">
+        </ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="right">
+
+        <!--menu header-->
+        <ion-header-bar class="bar-positive  right-menu-bar">
+            <h1 class="title menu-title">{{menuTitle}}</h1>
+        </ion-header-bar>
+
+        <!--manu items-->
+        <ion-content class="right-menu-container">
+            <ion-list class="right-menu-list">
+                <ion-item menu-close href="#/app/posts" class="right-menu-tab">
+                    {{home}}
+                </ion-item>
+                <ion-item menu-close ng-repeat="cat in cats | orderBy:'-post_count'" ng-if="cat.post_count>0" class="right-menu-tab" href="#/app/cat/{{cat.ID}}">
+                    {{cat.name}}
+                    <i class="badge badge-positive">{{cat.post_count}}</i>
+                </ion-item>
+                <div class="item item-divider" menu-close href="#/app/tags">
+                    {{usefulLinks}}
+                </div>
+                <ion-item class="item item-icon-right right-menu-tab" menu-close href="#/app/tags">
+                    {{moreTags}}
+                    <i class="icon ion-pricetags positive"></i>
+                </ion-item>
+                <ion-item class="item item-icon-right right-menu-tab" menu-close href="#" 
+                          ng-click="openFacebookLink()">
+                    {{facebookText}}
+                    <i class="icon ion-social-facebook positive"></i>
+                </ion-item>
+                <ion-item class="item item-icon-right right-menu-tab" menu-close href="#/app/contact">
+                    {{contactUs}}
+                    <i class="icon ion-ios-email positive"></i>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+
+    </ion-side-menu>
+</ion-side-menus>

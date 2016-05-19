@@ -1,0 +1,43 @@
+<ion-view>
+<!--    view-title="{{pageTitle}}" >-->
+    <ion-nav-title>
+        <a class="headerTitle" href="#/app/posts"> {{pageTitle}}</a>
+    </ion-nav-title>
+
+    <!--page title-->
+    <div class="bar bar-subheader ">
+        <h2 class="title post-title">اتصل بنا</h2>
+    </div>
+
+    <ion-content class="has-subheader posts bckg-container">
+
+        <form name="myForm" novalidate>
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">الاسم</span>
+                    <input type="text" name="username" ng-model="username" ng-minlength="2" required>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">البريد</span>
+                    <input type="email" name="email" ng-model="email" ng-minlength="5" required>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">الرسالة</span>
+                    <textarea rows="4" cols="50" name="msg" ng-model="msg"  required>
+                    </textarea>
+                </label>
+
+                <div class="padding">
+                    <p ng-show="myForm.username.$error.required">* لابد من وضع الاسم</p>
+                </div>
+
+                <div class="padding">
+                    <button type="button" class="button button-block button-positive" ng-disabled="myForm.$invalid" ng-click="submitMail(username, email, msg)">ارسال</button>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+
+</ion-view>

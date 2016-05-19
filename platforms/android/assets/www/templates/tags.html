@@ -1,0 +1,22 @@
+<ion-view>
+<!--    view-title="{{pageTitle}}" >-->
+    <ion-nav-title>
+        <a class="headerTitle" href="#/app/posts"> {{pageTitle}}</a>
+    </ion-nav-title>
+    <div class="bar bar-subheader" >
+        <h2 ng-bind-html="subTitle" class="title post-title"></h2>
+       
+    </div>
+    <!--Tags-->
+    <ion-content class="has-subheader posts bckg-container">
+
+         <!--Tags-->
+        <li ng-show="tags " ng-repeat="tag in tags | orderBy:'-post_count' " class="item cat-container bckg-container ">
+            <ion-item href="#/app/tag/{{tag.slug}} " class="tag ">
+                <i class="icon ion-pricetags "></i> {{tag.name}}
+                <i class="badge badge-positive">{{tag.post_count}}</i>
+            </ion-item>
+        </li>
+        
+    </ion-content>
+</ion-view>

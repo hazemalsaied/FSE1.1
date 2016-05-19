@@ -1,0 +1,81 @@
+<ion-view>
+    <ion-nav-title>
+        <a class="headerTitle" href="#/app/posts"> {{pageTitle}}</a>
+    </ion-nav-title>
+
+    <!--Title Area-->
+    <div class="bar bar-subheader singlePostBar" ng-repeat="post in posts | filter: {ID: whichPost }">
+        
+        <!--Post Title-->
+        <h2 ng-bind-html="post.title" class="title post-title"></h2>
+        
+        <!--Share Area-->
+        <button class="button button-icon button-clear ion-android-share-alt " 
+                ng-click="shareAnywhere(post.title, post.title, post.attachments[0].url, post.short_URL) ">
+        </button>
+    </div>
+        
+    <ion-slide-box does-continue="false"  active-slide="getPostIndex()"
+        show-pager="false" auto-play="false" 
+                   on-slide-changed="refreshSlideInfo(index)">
+
+
+        <ion-slide  ng-repeat="post in posts" >
+            <ion-content class="has-subheader">
+                
+                <!--Thumbnail-->
+                <ion-item ng-show="post.featured_image " class="item item-image  thumbnail">
+                    <img ng-src="{{post.featured_image}} " />
+                </ion-item>
+
+                <!--Post date and comments number-->
+                <ion-item class="date-comments bckg-container ">
+                    <div class=" item item-text-wrap ">
+                        <span class="date ">{{post.date | limitTo: 10}}</span>
+                        <span class="badge badge-positive comments-num ">
+                        {{post.discussion.comment_count}}</span>
+                    </div>
+                </ion-item>
+
+                <!--Post content-->
+                <ion-item class="post-content-container bckg-container ">
+                    <ion-pane ng-show="post.content" ng-bind-html="post.content" class="item post-content "></ion-pane>
+                    
+                    <ion-item class="item item-text-wrap" ng-show="!post.content" ng-click="browsePost(post.short_URL)">
+                        <span>{{browsePostText}}</span>
+                    </ion-item>
+                </ion-item>
+
+                <!--Categores and Tgas-->
+                <div class=" cats-tags bckg-container ">
+                    <!--Categores-->
+                    <li ng-repeat="cat in post.categories " class="item cat-container bckg-container ">
+                        <ion-item href="#/app/cat/{{cat.ID}} " class="cat ">
+                            <i class="icon ion-pricetag "></i> {{cat.name}}
+                        </ion-item>
+                    </li>
+                    
+                    <!--Tags-->
+                    <li ng-show="post.tags " ng-repeat="tag in post.tags " class="item cat-container bckg-container ">
+                        <ion-item href="#/app/tag/{{tag.slug}} " class="tag ">
+                            <i class="icon ion-pricetags "></i> {{tag.name}}
+                        </ion-item>
+                    </li>
+                </div>
+
+                <!--Comments-->
+                <ion-item ng-show="post.comments " ng-repeat="comment in post.comments" class="item comment bckg-container">
+                    <div class="list card">
+                        <div class="item">
+                            <h2>{{comment.name | limitTo:10}}</h2>
+                            <p>{{comment.date}}</p>
+                        </div>
+                        <div ng-bind-html="comment.content" class=" item item-body comment-content "></div>
+                    </div>
+                </ion-item>
+                
+            </ion-content>
+        </ion-slide>
+    </ion-slide-box>
+
+</ion-view>
